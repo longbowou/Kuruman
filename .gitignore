@@ -12,5 +12,6 @@ env
 **/migrations/0*.py
 static/admin/
 logs/**
+db.sqlite3
 
 dump.json

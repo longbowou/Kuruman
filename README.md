@@ -1,6 +1,6 @@
 # Kuruman
 
-Django App for [Datatable](https://datatables.net) View
+Django App for [Datatables](https://datatables.net) View
 and [KTDatatable](https://keenthemes.com/metronic/?page=docs&section=html/components/datatable) View
 
 ## Requirements
