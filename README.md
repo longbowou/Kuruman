@@ -1,7 +1,7 @@
 # Kuruman
 
-Django App for [Datatables](https://datatables.net) View
-and [KTDatatable](https://keenthemes.com/metronic/?page=docs&section=html/components/datatable) View
+A sample project that uses [django-ktdatatable-view](https://pypi.org/project/django-ktdatatable-view) and
+[django-datatables-view](https://pypi.org/project/django-datatables-view)
 
 ## Requirements
 
@@ -13,37 +13,34 @@ and [KTDatatable](https://keenthemes.com/metronic/?page=docs&section=html/compon
 - Clone the repository
 - Build the application
 
-```
+```bash
 docker-compose build
 ```
 
 - Make migrations
 
-```
-docker-compose run --rm umlazi python manage.py makemigrations
+```bash
+docker-compose run --rm kuruman python manage.py makemigrations
 ```
 
 - Run migrations
 
-```
-docker-compose run --rm umlazi python manage.py migrate
+```bash
+docker-compose run --rm kuruman python manage.py migrate
 ```
 
 - Run seed database
 
-```
-docker-compose run --rm umlazi python manage.py seed
+```bash
+docker-compose run --rm kuruman python manage.py seed
 ```
 
 - Run the application
 
-```
+```bash
 docker-compose up
 ```
 
 ## Where is the application running?
 
 - Web App - [http://0.0.0.0:8000](http://0.0.0.0:8000/)
-- PgAdmin4 - [http://0.0.0.0:5050](http://0.0.0.0:5050)
-    - postgres@postgres.com
-    - postgres
