@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  kuruman:
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+
+  kuruman_pgadmin4:
+    ports:
+      - 5050:80

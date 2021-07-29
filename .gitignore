@@ -1,0 +1,16 @@
+.vscode
+__pyc*
+*/*__pyc
+*pyc*
+staticfiles
+
+.idea
+venv
+env
+./media/
+**/__pycache__
+**/migrations/0*.py
+static/admin/
+logs/**
+
+dump.json

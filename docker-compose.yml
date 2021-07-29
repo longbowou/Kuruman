@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  kuruman:
+    container_name: kuruman
+    build: .
+    command: gunicorn kuruman.asgi -w 1 --threads 2 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 --preload --timeout 60 --graceful-timeout 60
+    volumes:
+      - .:/code
+    expose:
+      - 8000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kuruman.rule=Host(`kuruman.longbowou.com`,`www.kuruman.longbowou.com`)
+      - traefik.http.routers.kuruman.tls=true
+      - traefik.http.routers.kuruman.tls.certresolver=le
+      - traefik.port=8000
+      - traefik.docker.network=traefik-proxy
+    depends_on:
+      - kuruman_postgres
+      - kuruman_pgadmin4
+    networks:
+      - default
+      - traefik-proxy
+    restart: unless-stopped
+
+  kuruman_postgres:
+    container_name: kuruman_postgres
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - kuruman_postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  kuruman_pgadmin4:
+    container_name: kuruman_pgadmin4
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kuruman_pgadmin4.rule=Host(`pgadmin.kuruman.longbowou.com`)
+      - traefik.http.routers.kuruman_pgadmin4.tls=true
+      - traefik.http.routers.kuruman_pgadmin4.tls.certresolver=le
+      - traefik.port=80
+      - traefik.docker.network=traefik-proxy
+    networks:
+      - default
+      - traefik-proxy
+    depends_on:
+      - kuruman_postgres
+    restart: unless-stopped
+
+volumes:
+  kuruman_postgres:
+
+networks:
+  default:
+    name: kuruman_network
+
+  traefik-proxy:
+    external: true
