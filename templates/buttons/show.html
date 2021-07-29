@@ -1,0 +1,5 @@
+{% load i18n %}
+<a href="{{ url }}" class="btn btn-sm btn-clean btn-icon btn-icon-sm btn-hover-icon-dark btn-square"
+   data-toggle="tooltip" title="{% trans "Show" %}">
+    <i class="{% if icon %} {{ icon }} {% else %} flaticon-eye {% endif %}"></i>
+</a>

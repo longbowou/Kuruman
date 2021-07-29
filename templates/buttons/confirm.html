@@ -1,0 +1,6 @@
+{% load i18n %}
+<a href="javascript:void(0);" class="btn btn-sm btn-clean btn-icon btn-icon-sm btn-hover-icon-danger btn-square"
+   data-toggle="tooltip" title="{% if tooltip %} {{ tooltip }} {% else %} {% trans "Confirm" %} {% endif %}"
+   onclick="if(confirm('{% if confirm %} {{ confirm }} {% else %} {% blocktranslate with title=title %} Do you really want to {{ title }} ? {% endblocktranslate %} {% endif %}')) window.location = '{{ url }}'">
+    <i class="{% if icon %} {{ icon }} {% else %} fa fa-trash {% endif %}"></i>
+</a>

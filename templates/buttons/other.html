@@ -1,0 +1,5 @@
+{% load i18n %}
+<a href="{{ url }}" class="btn btn-sm btn-clean btn-icon btn-icon-sm btn-hover-icon-{{ color }} btn-square"
+   data-toggle="tooltip" title="{{ title }}" {% if target %}target="{{ target }}"{% endif %}>
+    <i class="{{ icon }}"></i>
+</a>

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Datatables" %}{% endblock %}
+
+{% block styles %}
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="{% static 'kuruman/plugins/custom/datatables/datatables.bundle.css' %}" rel="stylesheet"
+          type="text/css"/>
+    <!--end::Page Vendors Styles-->
+{% endblock %}
+
+{% block breadcrumb %}
+    <!--begin::Title-->
+    <h2 class="text-white font-weight-bold my-2 mr-5">{% trans "Datatables" %}</h2>
+    <!--end::Title-->
+    <!--begin::Breadcrumb-->
+    <div class="d-flex align-items-center font-weight-bold my-2">
+        <!--begin::Item-->
+        <a href="#" class="opacity-75 hover-opacity-100">
+            <i class="flaticon2-shelter text-white icon-1x"></i>
+        </a>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+        <a href="" class="text-white text-hover-white opacity-75 hover-opacity-100">{% trans "Datatables" %}</a>
+        <!--end::Item-->
+    </div>
+    <!--end::Breadcrumb-->
+{% endblock %}
+
+{% block content %}
+    <div class="card card-custom">
+        <!--begin::Header-->
+        <div class="card-header flex-wrap pb-0">
+            <div class="card-title">
+                <span class="svg-icon svg-icon-primary svg-icon-3x mr-3"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo2\dist/../src/media/svg/icons\Shopping\Box2.svg--><svg
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                        height="24px" viewBox="0 0 24 24" version="1.1">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect x="0" y="0" width="24" height="24"/>
+        <path d="M4,9.67471899 L10.880262,13.6470401 C10.9543486,13.689814 11.0320333,13.7207107 11.1111111,13.740321 L11.1111111,21.4444444 L4.49070127,17.526473 C4.18655139,17.3464765 4,17.0193034 4,16.6658832 L4,9.67471899 Z M20,9.56911707 L20,16.6658832 C20,17.0193034 19.8134486,17.3464765 19.5092987,17.526473 L12.8888889,21.4444444 L12.8888889,13.6728275 C12.9050191,13.6647696 12.9210067,13.6561758 12.9368301,13.6470401 L20,9.56911707 Z"
+              fill="#000000"/>
+        <path d="M4.21611835,7.74669402 C4.30015839,7.64056877 4.40623188,7.55087574 4.5299008,7.48500698 L11.5299008,3.75665466 C11.8237589,3.60013944 12.1762411,3.60013944 12.4700992,3.75665466 L19.4700992,7.48500698 C19.5654307,7.53578262 19.6503066,7.60071528 19.7226939,7.67641889 L12.0479413,12.1074394 C11.9974761,12.1365754 11.9509488,12.1699127 11.9085461,12.2067543 C11.8661433,12.1699127 11.819616,12.1365754 11.7691509,12.1074394 L4.21611835,7.74669402 Z"
+              fill="#000000" opacity="0.3"/>
+    </g>
+</svg><!--end::Svg Icon--></span>
+                <h3 class="card-label">
+                    {% trans "Remote Datasource" %}
+                    <span class="d-block text-muted pt-2 font-size-sm">
+                        {% trans "Sorting & pagination remote datasource" %}
+                    </span>
+                </h3>
+            </div>
+            <div class="card-toolbar">
+            </div>
+        </div>
+        <!--end::Header-->
+
+        <!--begin::Body-->
+        <div class="card-body">
+            <table class="table table-hover dataTable dtr-inline text-center"
+                   id="dataTable">
+                <thead>
+                <tr>
+                    <th>{% trans "# Order ID" %}</th>
+                    <th>{% trans 'Country' %}</th>
+                    <th>{% trans 'Ship Date' %}</th>
+                    <th>{% trans "Company Name" %}</th>
+                    <th>{% trans 'Status' %}</th>
+                    <th>{% trans 'Type' %}</th>
+                    <th>{% trans 'Actions' %}</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>{% trans "Order ID" %}</th>
+                    <th>{% trans 'Country' %}</th>
+                    <th>{% trans 'Ship Date' %}</th>
+                    <th>{% trans "Company Name" %}</th>
+                    <th>{% trans 'Status' %}</th>
+                    <th>{% trans 'Type' %}</th>
+                    <th>{% trans 'Actions' %}</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!--end: Datatable-->
+        <!--end::Body-->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{% static 'kuruman/plugins/custom/datatables/datatables.bundle.js' %}"></script>
+    <!--end::Page Vendors-->
+
+    <script>
+        var datatable = $('#dataTable').DataTable({
+            "lengthMenu": [[5, 10, 50, 100], [5, 10, 50, 100]],
+            "order": [[2, "asc"]],
+            "columnDefs": [
+                {
+                    orderable: false,
+                    searchable: false,
+                    targets: [6]
+                }
+            ],
+            "responsive": true,
+            "searching": true,
+            "processing": true,
+            "serverSide": true,
+            "stateSave": true,
+            "ajax": {
+                url: "{% url 'datatables-dt' %}",
+            },
+        });
+
+        datatable.on('draw', function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+{% endblock %}
+
