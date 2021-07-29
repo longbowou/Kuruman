@@ -34,7 +34,9 @@ class KTDatatableView(BaseKTDatatableView):
     def render_column(self, row, column):
         row: Order
 
-        if column == "created_at":
+        if column == "order_id":
+            return f"#{row.order_id.upper()}"
+        elif column == "created_at":
             return f"{date_filter(row.created_at)}"
         elif column == "status":
             class_name = 'info'
@@ -82,7 +84,9 @@ class DatatablesView(BaseDatatableView):
     def render_column(self, row, column):
         row: Order
 
-        if column == "created_at":
+        if column == "order_id":
+            return f"#{row.order_id.upper()}"
+        elif column == "created_at":
             return f"{date_filter(row.created_at)}"
         elif column == "status":
             class_name = 'info'
